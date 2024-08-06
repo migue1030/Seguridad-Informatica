@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login y Registro</title>
+    <link rel="stylesheet" href="css/style.css">
+    
+</head>
+<body>
+    <div class="login-box" id="loginBox">
+        <p>Login</p>
+        <form id="loginForm">
+            <div class="user-box">
+                <input required="" name="loginEmail" type="text" id="loginEmail">
+                <label>Email</label>
+            </div>
+            <div class="user-box">
+                <input required="" name="loginPassword" type="password" id="loginPassword">
+                <label>Password</label>
+            </div>
+            <a href="#" id="loginSubmit">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Submit
+            </a>
+        </form>
+        <p>Don't have an account? <a href="#" class="a2" id="showRegister">Sign up!</a></p>
+    </div>
+
+    <div class="login-box" id="registerBox" style="display:none;">
+        <p>Register</p>
+        <form id="registerForm">
+            <div class="user-box">
+                <input required="" name="registerEmail" type="text" id="registerEmail">
+                <label>Email</label>
+            </div>
+            <div class="user-box">
+                <input required="" name="registerPassword" type="password" id="registerPassword">
+                <label>Password</label>
+            </div>
+            <a href="#" id="registerSubmit">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Sign Up
+            </a>
+        </form>
+        <p>Already have an account? <a href="#" class="a2" id="showLogin">Login!</a></p>
+    </div>
+
+    <div id="message" style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); color: white;"></div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>

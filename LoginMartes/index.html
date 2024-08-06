@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Principal</title>
+    <link rel="stylesheet" href="css/index.css">
+
+</head>
+<body>
+    <h1>Bienvenido a la página principal</h1>
+    <p>Has iniciado sesión correctamente.</p>
+    <p id="sessionTimer">La sesión expirará en: 60 segundos</p>
+    <button id="logoutBtn">Cerrar sesión</button>
+
+    <script type="module">
+        import { Auth } from './js/auth.js';
+        import { Storage } from './js/storage.js';
+
+        const storage = new Storage();
+        const auth = new Auth(storage);
+
+        // Verificar si el usuario está logueado
+        if (!auth.isLoggedIn()) {
+            window.location.href = 'login.html';
+        }
+
+        // Actualizar el temporizador de sesión
+        function updateSessionTimer() {
+            const expirationTime = parseInt(localStorage.getItem('sessionExpiration'));
+            const currentTime = new Date().getTime();
+            const timeLeft = Math.max(0, Math.floor((expirationTime - currentTime) / 1000));
+            
+            document.getElementById('sessionTimer').textContent = `La sesión expirará en: ${timeLeft} segundos`;
+            
+            if (timeLeft <= 0) {
+                auth.logout();
+                window.location.href = 'login.html';
+            } else {
+                setTimeout(updateSessionTimer, 1000);
+            }
+        }
+
+        updateSessionTimer();
+
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            auth.logout();
+            window.location.href = 'login.html';
+        });
+
+        // Cerrar sesión cuando se cierra la ventana
+        window.addEventListener('beforeunload', () => {
+            auth.logout();
+        });
+    </script>
+</body>
+</html>
