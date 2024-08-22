@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  # Servicio para la aplicación Node.js
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 
+    volumes:
+      - .:/usr/src/app
+
+  # Servicio para la base de datos MySQL
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: 
+      MYSQL_DATABASE: 
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+# Volúmenes persistentes para la base de datos
+volumes:
+  mysql-data:
